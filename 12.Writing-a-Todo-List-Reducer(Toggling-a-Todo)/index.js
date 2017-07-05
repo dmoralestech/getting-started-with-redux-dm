@@ -15,11 +15,9 @@ const todos = (state = [], action) => {
       ];
     case 'TOGGLE_TODO':
         return state.map(todo => {
-          // id 不相等時，直接回傳原本的 todo
           if (todo.id !== action.id) {
             return todo;
           }
-          // id 相等時，回傳新的 todo 並改變 completed
           return {
             ...todo,
             completed: !todo.completed
@@ -66,7 +64,6 @@ const testToggleTodo = () => {
       completed: false
     }
   ];
-  // 改變 id 為 1 的 todo 的狀態
   const action = {
     type: 'TOGGLE_TODO',
     id: 1
