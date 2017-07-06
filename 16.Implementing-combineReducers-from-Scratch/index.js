@@ -53,7 +53,7 @@ const combineReducers = (reducers) => {
   return (state = {}, action) => {
     return Object.keys(reducers).reduce(
       (nextState, key) => {
-        nextState[key] = reducers[key](state[key], action);  // state 跟 reducer key
+        nextState[key] = reducers[key](state[key], action);  // state  reducer key
         return nextState;
       },
       {}  //  nextState
