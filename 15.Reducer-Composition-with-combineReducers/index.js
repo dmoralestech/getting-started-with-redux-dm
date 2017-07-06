@@ -49,6 +49,9 @@ const visibilityFilter = (
   }
 };
 
+// combineReducers is a function that an object that contains the sub-reducers.
+// And it returns a function that has state and an action parameters
+// and returns an object with the new state.
 const todoApp = combineReducers({
   todos,
   visibilityFilter

@@ -49,6 +49,8 @@ const visibilityFilter = (
   }
 };
 
+// todoApp here is the top-level reducer. which is a function that accepts state and an action
+// and returns an object with the new state.
 const todoApp = (state = {}, action) => {
   return {
     todos: todos(
