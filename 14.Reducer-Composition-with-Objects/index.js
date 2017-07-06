@@ -49,7 +49,6 @@ const visibilityFilter = (
   }
 };
 
-// 可以使用 object 來結合 reducer 形成更大的 state tree
 const todoApp = (state = {}, action) => {
   return {
     todos: todos(

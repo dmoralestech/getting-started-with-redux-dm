@@ -49,7 +49,6 @@ const visibilityFilter = (
   }
 };
 
-// redux 提供 combineReducers 來幫助結合 reducer, combineReducers 裡處理的 state 的 reducer 通常同名
 const todoApp = combineReducers({
   todos,
   visibilityFilter

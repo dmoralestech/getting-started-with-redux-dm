@@ -50,14 +50,13 @@ const visibilityFilter = (
 };
 
 const combineReducers = (reducers) => {
-  // 回傳新的 reducer: 把各 reducer 合在一起
   return (state = {}, action) => {
     return Object.keys(reducers).reduce(
       (nextState, key) => {
-        nextState[key] = reducers[key](state[key], action);  // state 跟 reducer 使用一樣的 key
+        nextState[key] = reducers[key](state[key], action);  // state 跟 reducer key
         return nextState;
       },
-      {}  //  nextState 初始值
+      {}  //  nextState
     );
   };
 };

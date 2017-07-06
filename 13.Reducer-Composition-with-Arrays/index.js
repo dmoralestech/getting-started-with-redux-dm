@@ -2,8 +2,6 @@
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
-// Reducer 裡可以再使用更 basic reducer 來處理 state tree
-// todo reducer 處理單一 todo 的 state
 const todo = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -26,7 +24,6 @@ const todo = (state, action) => {
   }
 };
 
-// todos reducer 處理 todo array 並使用 todo reducer 處理單一 todo
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
