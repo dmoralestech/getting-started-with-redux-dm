@@ -98,7 +98,6 @@ class TodoApp extends Component {
   render() {
     const { todos, visibilityFilter } = this.props;
 
-    // 經由 filter 篩選要顯示的 todo
     const visibleTodos = getVisibleTodos(todos, visibilityFilter);
 
     return (

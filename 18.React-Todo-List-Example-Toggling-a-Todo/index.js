@@ -63,6 +63,8 @@ class TodoApp extends Component {
   render() {
     return (
       <div>
+        <input type="text" name="username"/>
+        <p>Hello</p>
         <input ref={node => {
             this.input = node;  // 紀錄 input 的節點
           }}/>
@@ -74,7 +76,7 @@ class TodoApp extends Component {
           });
           this.input.value = '';  // 清除 input 的值
         }}>
-          Add Todo
+          Add Todos
         </button>
         <ul>
           {this.props.todos.map(todo => {  // todo 列表
