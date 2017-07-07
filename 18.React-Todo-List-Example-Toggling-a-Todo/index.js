@@ -64,6 +64,22 @@ class TodoApp extends Component {
     return (
       <div>
         <input type="text" name="username"/>
+        <input type="checkbox"/>
+        <input type="color"/>
+        <input type="date"/>
+        <input type="datetime-local"/>
+        <input type="file"/>
+        <input type="image"/>
+        <input type="month"/>
+        <input type="number"/>
+        <input type="password"/>
+        <input type="radio"/>
+        <input type="range"/>
+        <input type="reset"/>
+        <input type="search"/>
+        <input type="time"/>
+        <input type="url"/>
+        <input type="tel"/>
         <p>Hello</p>
         <input ref={node => {
             this.input = node;  // 紀錄 input 的節點
