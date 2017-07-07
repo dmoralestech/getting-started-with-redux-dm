@@ -58,7 +58,7 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 
-let nextTodoId = 0;  // 紀錄目前有幾個 todo 當做 todo 的 id
+let nextTodoId = 0;
 class TodoApp extends Component {
   render() {
     return (

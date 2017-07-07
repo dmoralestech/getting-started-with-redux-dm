@@ -6,6 +6,8 @@ const AddTodoEntry = ({onClick}) => {
 
   return (
     <div>
+      <input type="text" name="username"/>
+      <p>Hello</p>
       <input ref={node => {
           input = node;
         }}/>
@@ -13,8 +15,9 @@ const AddTodoEntry = ({onClick}) => {
         onClick(input.value);
         input.value = '';
       }}>
-        Add Todo
+        click Add Todo
       </button>
+      <p>World</p>
     </div>
   );
 };
