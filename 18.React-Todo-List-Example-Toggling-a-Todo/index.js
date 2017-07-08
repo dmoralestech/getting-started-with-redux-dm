@@ -64,14 +64,20 @@ class TodoApp extends Component {
   }
 
   onChange(e) {
-    console.log(e.target);
+    console.log('element', e);
+    console.log('target: ', e.target);
     console.log('value: ', e.target.value);
   }
 
   render() {
+    function onChange2(e) {
+      console.log('element', e);
+      console.log('target: ', e.target);
+      console.log('value: ', e.target.value);
+    }
     return (
       <div>
-        <input type="text" name="username" onChange={this.onChange}/>
+        <input type="text" name="username" onChange={onChange2}/>
         <input type="checkbox" onChange={this.onChange}/>
         <input type="color" onChange={this.onChange}/>
         <input type="date" onChange={this.onChange}/>
