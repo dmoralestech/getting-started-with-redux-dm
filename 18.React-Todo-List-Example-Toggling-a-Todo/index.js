@@ -1,7 +1,6 @@
-
 import {createStore, combineReducers} from 'redux';
 import ReactDOM from 'react-dom';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -33,16 +32,14 @@ const todos = (state = [], action) => {
         todo(undefined, action)
       ];
     case 'TOGGLE_TODO':
-        return state.map(t => todo(t, action));
+      return state.map(t => todo(t, action));
     default:
       return state;
   }
 };
 
-const visibilityFilter = (
-  state = 'SHOW_ALL',
-  action
-) => {
+const visibilityFilter = (state = 'SHOW_ALL',
+                          action) => {
   switch (action.type) {
     case 'SET_VISIBILITY_FILTER':
       return action.filter;
@@ -60,30 +57,41 @@ const store = createStore(todoApp);
 
 let nextTodoId = 0;
 class TodoApp extends Component {
+
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(e) {
+    console.log(e.target);
+    console.log('value: ', e.target.value);
+  }
+
   render() {
     return (
       <div>
-        <input type="text" name="username"/>
-        <input type="checkbox"/>
-        <input type="color"/>
-        <input type="date"/>
-        <input type="datetime-local"/>
-        <input type="file"/>
-        <input type="image"/>
-        <input type="month"/>
-        <input type="number"/>
-        <input type="password"/>
-        <input type="radio"/>
-        <input type="range"/>
-        <input type="reset"/>
-        <input type="search"/>
-        <input type="time"/>
-        <input type="url"/>
-        <input type="tel"/>
+        <input type="text" name="username" onChange={this.onChange}/>
+        <input type="checkbox" onChange={this.onChange}/>
+        <input type="color" onChange={this.onChange}/>
+        <input type="date" onChange={this.onChange}/>
+        <input type="datetime-local" onChange={this.onChange}/>
+        <input type="file" onChange={this.onChange}/>
+        <input type="image" onChange={this.onChange}/>
+        <input type="month" onChange={this.onChange}/>
+        <input type="number" onChange={this.onChange}/>
+        <input type="password" onChange={this.onChange}/>
+        <input type="radio" onChange={this.onChange}/>
+        <input type="range" onChange={this.onChange}/>
+        <input type="reset" onChange={this.onChange}/>
+        <input type="search" onChange={this.onChange}/>
+        <input type="time" onChange={this.onChange}/>
+        <input type="url" onChange={this.onChange}/>
+        <input type="tel" onChange={this.onChange}/>
         <p>Hello</p>
         <input ref={node => {
-            this.input = node;  // 紀錄 input 的節點
-          }}/>
+          this.input = node;  // 紀錄 input 的節點
+        }}/>
         <button onClick={() => {  // 新增 Todo 的 button
           store.dispatch({
             type: 'ADD_TODO',
@@ -115,7 +123,8 @@ class TodoApp extends Component {
       </div>
     );
   };
-};
+}
+;
 
 const render = () => {
   ReactDOM.render(
