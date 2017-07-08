@@ -94,6 +94,19 @@ class TodoApp extends Component {
         <input type="time" onChange={this.onChange}/>
         <input type="url" onChange={this.onChange}/>
         <input type="tel" onChange={this.onChange}/>
+
+        <form action="">
+          <input type="radio" name="gender" value="male" onChange={this.onChange}/> Male<br/>
+          <input type="radio" name="gender" value="female" onChange={this.onChange}/> Female<br/>
+        </form>
+
+        <select onChange={this.onChange}>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="opel">Opel</option>
+          <option value="audi">Audi</option>
+        </select>
+
         <p>Hello</p>
         <input ref={node => {
           this.input = node;  // 紀錄 input 的節點
