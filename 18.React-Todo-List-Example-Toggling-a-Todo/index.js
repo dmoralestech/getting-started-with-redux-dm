@@ -102,7 +102,7 @@ class TodoApp extends Component {
           <input type="radio" name="gender" value="female" onChange={this.onChange}/> Female<br/>
         </form>
 
-        <select name="carOption" onChange={this.onChange}>
+        <select disabled="true" autofocus name="carOption" onChange={this.onChange}>
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
           <option value="opel">Opel</option>
