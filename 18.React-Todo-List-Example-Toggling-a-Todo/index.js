@@ -67,6 +67,7 @@ class TodoApp extends Component {
     console.log('element', e);
     console.log('target: ', e.target);
     console.log('value: ', e.target.value);
+    console.log('name: ', e.target.name);
   }
 
   render() {
@@ -75,6 +76,7 @@ class TodoApp extends Component {
       console.log('target: ', e.target);
       console.log('value: ', e.target.value);
     }
+
     return (
       <div>
         <input type="text" name="username" onChange={onChange2}/>
@@ -100,7 +102,7 @@ class TodoApp extends Component {
           <input type="radio" name="gender" value="female" onChange={this.onChange}/> Female<br/>
         </form>
 
-        <select onChange={this.onChange}>
+        <select name="carOption" onChange={this.onChange}>
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
           <option value="opel">Opel</option>
