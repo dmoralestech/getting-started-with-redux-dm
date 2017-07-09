@@ -55,9 +55,7 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 
-//  Filter 的選項
 const FilterLink = ({ filter, currentFilter, children }) => {
-  //  選擇的 Filter
   if (filter === currentFilter) {
     return (
       <span>{children}</span>
@@ -103,7 +101,7 @@ class TodoApp extends Component {
     return (
       <div>
         <input ref={node => {
-            this.input = node;  // 紀錄 input 的節點
+            this.input = node;
           }}/>
         <button onClick={() => {  // 新增 Todo 的 button
           store.dispatch({

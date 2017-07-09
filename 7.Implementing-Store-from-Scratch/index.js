@@ -10,19 +10,23 @@ const counter = (state = 0, action) => {
   }
 }
 
+// createStore returns an object with 3 functions: getState, dispatch and subscribe
+// getState returns the contents of the current state object
+// dispatch gets the new state by calling the reducer with the new action and call each listener because there's a change
+// subscribe makes you add listener to the store. it also returns an unsubscribe function.
 const createStore = (reducer) => {
-  let state;  // 目前的 state
-  let listeners = [];  // 所有註冊的 listener
+  let state;
+  let listeners = [];
 
   const getState = () => state;
 
   const dispatch = (action) => {
-    state = reducer(state, action);  // dispatch 時，傳送目前的 state 進去 reducer
-    listeners.forEach(listener => listener());  // 通知所有註冊的 listener
+    state = reducer(state, action);
+    listeners.forEach(listener => listener());
   };
 
   const subscribe = (listener) => {
-    listeners.push(listener);  // 註冊 listener 存入 listeners 陣列
+    listeners.push(listener);
 
     return () => {  // 回傳 function ，作為移除 listener 使用。
       listeners = listeners.filter(l => l !== listener);

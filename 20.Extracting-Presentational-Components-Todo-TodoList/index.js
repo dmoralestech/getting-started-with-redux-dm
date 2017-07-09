@@ -1,4 +1,3 @@
-
 import {createStore, combineReducers} from 'redux';
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
@@ -76,7 +75,6 @@ const FilterLink = ({ filter, currentFilter, children }) => {
   );
 };
 
-// todo 元件，資訊都從 props 獲得
 const Todo = ({ onClick, completed, text }) => {
   return (
     <li
