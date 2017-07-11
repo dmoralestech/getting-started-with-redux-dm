@@ -121,6 +121,8 @@ class TodoApp extends Component {
   render() {
     console.log('props: ', this.props)
     const { todos, visibilityFilter } = this.props;
+    console.log('todos:', todos);
+    console.log('visibilityFilter:', visibilityFilter);
 
     const visibleTodos = getVisibleTodos(todos, visibilityFilter);
 
@@ -180,7 +182,7 @@ class TodoApp extends Component {
 const render = () => {
   ReactDOM.render(
     //  {...store.getState()} will be destructured later
-    <TodoApp {store.getState()}/>,
+    <TodoApp {...store.getState()}/>,
     document.getElementById('root')
   );
 };
