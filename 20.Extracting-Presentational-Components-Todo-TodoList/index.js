@@ -93,7 +93,6 @@ const TodoList = ({ todos, onTodoClick }) => {
           key={todo.id}
           {...todo}
           onClick={() => {
-            // 使用 callback function, 監聽 onClick 事件, 觸發時, 呼叫 onTodoClick 並傳入 todo's id
             onTodoClick(todo.id);
           }}
           />
@@ -120,6 +119,7 @@ const getVisibleTodos = (todos, filter) => {
 let nextTodoId = 0;
 class TodoApp extends Component {
   render() {
+    console.log('props: ', this.props)
     const { todos, visibilityFilter } = this.props;
 
     const visibleTodos = getVisibleTodos(todos, visibilityFilter);
@@ -179,7 +179,8 @@ class TodoApp extends Component {
 
 const render = () => {
   ReactDOM.render(
-    <TodoApp {...store.getState()}/>,
+    //  {...store.getState()} will be destructured later
+    <TodoApp {store.getState()}/>,
     document.getElementById('root')
   );
 };
