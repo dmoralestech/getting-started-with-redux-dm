@@ -164,10 +164,6 @@ const getVisibleTodos = (todos, filter) => {
 };
 
 let nextTodoId = 0;
-// Container Component
-// 負責分配 data, action 給各個 Presentational Component
-// 使得 Presentational Component 只要依據 props 就可以 render
-// 當轉換架構時(ex. redux => flux), 只需更改 Container Component 就可以了
 const TodoApp = ({ todos, visibilityFilter }) => (
   <div>
     <AddTodo onAddClick={text =>

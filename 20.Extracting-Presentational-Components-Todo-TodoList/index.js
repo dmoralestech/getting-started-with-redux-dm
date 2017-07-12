@@ -181,7 +181,7 @@ class TodoApp extends Component {
 
 const render = () => {
   ReactDOM.render(
-    //  {...store.getState()} will be destructured later
+    //  {...store.getState()} will be deconstructed later
     <TodoApp {...store.getState()}/>,
     document.getElementById('root')
   );
