@@ -1,6 +1,7 @@
+
 import {createStore, combineReducers} from 'redux';
 import ReactDOM from 'react-dom';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -38,8 +39,7 @@ const todos = (state = [], action) => {
   }
 };
 
-const visibilityFilter = (state = 'SHOW_ALL',
-                          action) => {
+const visibilityFilter = (state = 'SHOW_ALL', action) => {
   switch (action.type) {
     case 'SET_VISIBILITY_FILTER':
       return action.filter;
@@ -55,63 +55,53 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 
-let nextTodoId = 0;
+const FilterLink = ({ filter, currentFilter, children }) => {
+  if (filter === currentFilter) {
+    return (
+      <span>{children}</span>
+    )
+  }
+  return (
+    <a href="#"
+       onClick={e => {
+         e.preventDefault();
+         store.dispatch({
+           type: 'SET_VISIBILITY_FILTER',
+           filter
+         });
+       }}
+    >
+      {children}
+    </a>
+  );
+};
+
+const getVisibleTodos = (todos, filter) => {
+  switch (filter) {
+    case 'SHOW_ALL':
+      return todos;
+    case 'SHOW_COMPLETED':
+      return todos.filter(
+        t => t.completed
+      );
+    case 'SHOW_ACTIVE':
+      return todos.filter(
+        t => !t.completed
+      );
+  }
+}
+
+let nextTodoId = 0;  // 紀錄目前有幾個 todo 當做 todo 的 id
 class TodoApp extends Component {
-
-  constructor(props) {
-    super(props);
-    this.onChange = this.onChange.bind(this);
-  }
-
-  onChange(e) {
-    console.log('element', e);
-    console.log('target: ', e.target);
-    console.log('value: ', e.target.value);
-    console.log('name: ', e.target.name);
-  }
-
   render() {
-    function onChange2(e) {
-      console.log('element', e);
-      console.log('target: ', e.target);
-      console.log('value: ', e.target.value);
-    }
+    const { todos, visibilityFilter } = this.props;
+
+    const visibleTodos = getVisibleTodos(todos, visibilityFilter);
 
     return (
       <div>
-        <input type="text" name="username" onChange={onChange2}/>
-        <input type="checkbox" onChange={this.onChange}/>
-        <input type="color" onChange={this.onChange}/>
-        <input type="date" onChange={this.onChange}/>
-        <input type="datetime-local" onChange={this.onChange}/>
-        <input type="file" onChange={this.onChange}/>
-        <input type="image" onChange={this.onChange}/>
-        <input type="month" onChange={this.onChange}/>
-        <input type="number" onChange={this.onChange}/>
-        <input type="password" onChange={this.onChange}/>
-        <input type="radio" onChange={this.onChange}/>
-        <input type="range" onChange={this.onChange}/>
-        <input type="reset" onChange={this.onChange}/>
-        <input type="search" onChange={this.onChange}/>
-        <input type="time" onChange={this.onChange}/>
-        <input type="url" onChange={this.onChange}/>
-        <input type="tel" onChange={this.onChange}/>
-
-        <form action="">
-          <input type="radio" name="gender" value="male" onChange={this.onChange}/> Male<br/>
-          <input type="radio" name="gender" value="female" onChange={this.onChange}/> Female<br/>
-        </form>
-
-        <select disabled="true" autofocus name="carOption" onChange={this.onChange}>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
-        </select>
-
-        <p>Hello</p>
         <input ref={node => {
-          this.input = node;  // 紀錄 input 的節點
+          this.input = node;
         }}/>
         <button onClick={() => {  // 新增 Todo 的 button
           store.dispatch({
@@ -121,10 +111,10 @@ class TodoApp extends Component {
           });
           this.input.value = '';  // 清除 input 的值
         }}>
-          Add Todos
+          Add Todo
         </button>
         <ul>
-          {this.props.todos.map(todo => {  // todo 列表
+          {visibleTodos.map(todo => {  // todo 列表
             return (
               <li key={todo.id}
                   onClick={() => {  // 點擊 todo 可以 uncompleted/completed todo
@@ -141,15 +131,38 @@ class TodoApp extends Component {
             );
           })}
         </ul>
+        <p>
+          Show:
+          {' '}
+          <FilterLink
+            filter='SHOW_ALL'
+            currentFilter={visibilityFilter}
+          >
+            All
+          </FilterLink>
+          {', '}
+          <FilterLink
+            filter='SHOW_ACTIVE'
+            currentFilter={visibilityFilter}
+          >
+            Active
+          </FilterLink>
+          {', '}
+          <FilterLink
+            filter='SHOW_COMPLETED'
+            currentFilter={visibilityFilter}
+          >
+            completed
+          </FilterLink>
+        </p>
       </div>
     );
   };
-}
-;
+};
 
 const render = () => {
   ReactDOM.render(
-    <TodoApp todos={store.getState().todos}/>,
+    <TodoApp {...store.getState()}/>,
     document.getElementById('root')
   );
 };
