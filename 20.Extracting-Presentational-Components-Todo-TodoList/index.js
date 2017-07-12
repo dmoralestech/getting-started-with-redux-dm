@@ -119,11 +119,7 @@ const getVisibleTodos = (todos, filter) => {
 let nextTodoId = 0;
 class TodoApp extends Component {
   render() {
-    console.log('props: ', this.props)
     const { todos, visibilityFilter } = this.props;
-    console.log('todos:', todos);
-    console.log('visibilityFilter:', visibilityFilter);
-
     const visibleTodos = getVisibleTodos(todos, visibilityFilter);
 
     return (

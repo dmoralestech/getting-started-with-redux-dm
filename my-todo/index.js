@@ -1,7 +1,6 @@
-
 import {createStore, combineReducers} from 'redux';
 import ReactDOM from 'react-dom';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -55,7 +54,7 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 
-const FilterLink = ({ filter, currentFilter, children }) => {
+const FilterLink = ({filter, currentFilter, children}) => {
   if (filter === currentFilter) {
     return (
       <span>{children}</span>
@@ -76,6 +75,21 @@ const FilterLink = ({ filter, currentFilter, children }) => {
   );
 };
 
+const TodoList = ({todos, onTodoClick}) => {
+  return (
+      <ul>
+        { todos.map(todo => {
+          <Todo
+            key={todo.id}
+            {...todo}
+            onClick={() => onTodoClick(todo.id)}
+            />
+        })
+        }
+      </ul>
+    );
+};
+
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
     case 'SHOW_ALL':
@@ -91,11 +105,10 @@ const getVisibleTodos = (todos, filter) => {
   }
 }
 
-let nextTodoId = 0;  // 紀錄目前有幾個 todo 當做 todo 的 id
+let nextTodoId = 0;
 class TodoApp extends Component {
   render() {
-    const { todos, visibilityFilter } = this.props;
-
+    const {todos, visibilityFilter} = this.props;
     const visibleTodos = getVisibleTodos(todos, visibilityFilter);
 
     return (
@@ -103,27 +116,27 @@ class TodoApp extends Component {
         <input ref={node => {
           this.input = node;
         }}/>
-        <button onClick={() => {  // 新增 Todo 的 button
+        <button onClick={() => {
           store.dispatch({
             type: 'ADD_TODO',
-            text: this.input.value,  // 取得 input 的值
+            text: this.input.value,
             id: nextTodoId++
           });
-          this.input.value = '';  // 清除 input 的值
+          this.input.value = '';
         }}>
           Add Todo
         </button>
         <ul>
-          {visibleTodos.map(todo => {  // todo 列表
+          {visibleTodos.map(todo => {
             return (
               <li key={todo.id}
-                  onClick={() => {  // 點擊 todo 可以 uncompleted/completed todo
+                  onClick={() => {
                     store.dispatch({
                       type: 'TOGGLE_TODO',
                       id: todo.id
                     });
                   }}
-                  style={{  // completed 時, 把 todo 畫上刪節符號
+                  style={{
                     textDecoration: todo.completed ? 'line-through' : 'none'
                   }}>
                 {todo.text}
@@ -158,7 +171,8 @@ class TodoApp extends Component {
       </div>
     );
   };
-};
+}
+;
 
 const render = () => {
   ReactDOM.render(
