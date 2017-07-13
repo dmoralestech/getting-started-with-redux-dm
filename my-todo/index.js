@@ -82,7 +82,7 @@ const Todo = ({onClick, color, completed, text}) => {
   return (
     <li
       onClick={onClick}
-      style={{ textDecoration: completed ? 'line-through' : 'none' }}>
+      style={{textDecoration: completed ? 'line-through' : 'none'}}>
       {text}
     </li>
   );
@@ -90,25 +90,27 @@ const Todo = ({onClick, color, completed, text}) => {
 };
 
 // all the props are contained in one object
-const TodoList = ({ todos, onTodoClick, color }) => {
+const TodoList = ({todos, onTodoClick, color}) => {
   return (
     <ul>
-      {todos.map(todo =>
-        <Todo
-          key={todo.id}
-          color={color}
+      {todos.map(todo => {
+          console.log('todo:', todo);
+          console.log('{...todo}:', {...todo});
+          return (<Todo
+            key={todo.id}
+            color={color}
 
-          {...todo}
+            {...todo}
 
-          onClick={() => {
-            onTodoClick(todo.id);
-          }}
-        />
+            onClick={() => {
+              onTodoClick(todo.id);
+            }}
+          />);
+        }
       )}
     </ul>
   );
 };
-
 
 
 const getVisibleTodos = (todos, filter) => {
