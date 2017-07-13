@@ -75,6 +75,9 @@ const FilterLink = ({filter, currentFilter, children}) => {
   );
 };
 const Todo = (onClick, completed, text) => {
+  console.log('completed', completed);
+  console.log('text', completed);
+  console.log('props', this.props);
   return (
     <li
       onClick={onClick}
