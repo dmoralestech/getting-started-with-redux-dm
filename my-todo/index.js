@@ -75,9 +75,10 @@ const FilterLink = ({filter, currentFilter, children}) => {
   );
 };
 
-const Todo = (onClick, completed, text) => {
+const Todo = ({onClick, color, completed, text}) => {
   console.log('completed', completed);
-  console.log('text', completed);
+  console.log('text', text);
+  console.log('color', color);
   return (
     <li
       onClick={onClick}
@@ -88,12 +89,14 @@ const Todo = (onClick, completed, text) => {
 
 };
 
-const TodoList = ({ todos, onTodoClick }) => {
+// all the props are contained in one object
+const TodoList = ({ todos, onTodoClick, color }) => {
   return (
     <ul>
       {todos.map(todo =>
         <Todo
           key={todo.id}
+          color={color}
 
           {...todo}
 
@@ -146,6 +149,7 @@ class TodoApp extends Component {
           Add Todo
         </button>
         <TodoList
+          color="red"
           todos={visibleTodos}
           onTodoClick={ id => {
             store.dispatch({
