@@ -74,32 +74,38 @@ const FilterLink = ({filter, currentFilter, children}) => {
     </a>
   );
 };
+
 const Todo = (onClick, completed, text) => {
   console.log('completed', completed);
   console.log('text', completed);
   return (
     <li
       onClick={onClick}
-      style={{textDecoration: completed ? 'line-through' : 'none'}}>
+      style={{ textDecoration: completed ? 'line-through' : 'none' }}>
       {text}
     </li>
   );
 
 };
 
-const TodoList = ({todos, onTodoClick}) => {
+const TodoList = ({ todos, onTodoClick }) => {
   return (
     <ul>
-      { todos.map(todo =>
+      {todos.map(todo =>
         <Todo
           key={todo.id}
+
           {...todo}
-          onClick={() => {onTodoClick(todo.id)}}
+
+          onClick={() => {
+            onTodoClick(todo.id);
+          }}
         />
       )}
     </ul>
   );
 };
+
 
 
 const getVisibleTodos = (todos, filter) => {
