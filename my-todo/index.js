@@ -8,7 +8,8 @@ const todo = (state, action) => {
       return {
         id: action.id,
         text: action.text,
-        completed: false
+        completed: false,
+        size: 11
       };
     case 'TOGGLE_TODO':
       if (state.id !== action.id) {
@@ -75,10 +76,11 @@ const FilterLink = ({filter, currentFilter, children}) => {
   );
 };
 
-const Todo = ({onClick, color, completed, text}) => {
+const Todo = ({onClick, color, completed, text, size}) => {
   console.log('completed', completed);
   console.log('text', text);
   console.log('color', color);
+  console.log('size: ', size);
   return (
     <li
       onClick={onClick}
@@ -91,6 +93,7 @@ const Todo = ({onClick, color, completed, text}) => {
 
 // all the props are contained in one object
 const TodoList = ({todos, onTodoClick, color}) => {
+  console.log('todos', todos);
   return (
     <ul>
       {todos.map(todo => {
@@ -100,7 +103,7 @@ const TodoList = ({todos, onTodoClick, color}) => {
             key={todo.id}
             color={color}
 
-            {...todo}
+            {...todo}  // this spreads the properties of this object as props of Todo
 
             onClick={() => {
               onTodoClick(todo.id);
