@@ -77,7 +77,6 @@ const FilterLink = ({filter, currentFilter, children}) => {
 const Todo = (onClick, completed, text) => {
   console.log('completed', completed);
   console.log('text', completed);
-  console.log('props', this.props);
   return (
     <li
       onClick={onClick}
@@ -91,14 +90,13 @@ const Todo = (onClick, completed, text) => {
 const TodoList = ({todos, onTodoClick}) => {
   return (
     <ul>
-      { todos.map(todo => {
+      { todos.map(todo =>
         <Todo
           key={todo.id}
           {...todo}
-          onClick={() => onTodoClick(todo.id)}
+          onClick={() => {onTodoClick(todo.id)}}
         />
-      })
-      }
+      )}
     </ul>
   );
 };
@@ -131,6 +129,7 @@ class TodoApp extends Component {
           this.input = node;
         }}/>
         <button onClick={() => {
+          console.log('add todo click', this.input.value);
           store.dispatch({
             type: 'ADD_TODO',
             text: this.input.value,
