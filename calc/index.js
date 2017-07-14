@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactPoint from 'react-point'
-import './index.css'
+//import './index.css'
 
 class AutoScalingText extends React.Component {
   state = {

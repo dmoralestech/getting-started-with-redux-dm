@@ -8,7 +8,7 @@
     "start": "npm run babel && http-server .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Lee <jessy1092@gmail.com> (http://lee.logdown.com/)",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "babel-preset-es2015": "^6.1.18",
