@@ -76,6 +76,34 @@ const FilterLink = ({filter, currentFilter, children}) => {
   );
 };
 
+const Footer = ({visibilityFilter, onFilterClick}) => (
+  <p>
+    Show:
+    {' '}
+    <FilterLink
+      filter='SHOW_ALL'
+      currentFilter={visibilityFilter}
+    >
+      All
+    </FilterLink>
+    {', '}
+    <FilterLink
+      filter='SHOW_ACTIVE'
+      currentFilter={visibilityFilter}
+    >
+      Active
+    </FilterLink>
+    {', '}
+    <FilterLink
+      filter='SHOW_COMPLETED'
+      currentFilter={visibilityFilter}
+    >
+      completed
+    </FilterLink>
+  </p>
+
+)
+
 const Todo = ({onClick, color, completed, text, size}) => {
   console.log('completed', completed);
   console.log('text', text);
@@ -115,6 +143,8 @@ const TodoList = ({todos, onTodoClick, color}) => {
   );
 };
 
+// onAddClick is passed in as a prop.
+// It is a function that has one parameter and it sends a dispatch to store to add a new todo
 const AddTodo = ({onAddClick}) => {
   let input;
   return (
@@ -130,7 +160,6 @@ const AddTodo = ({onAddClick}) => {
       </button>
     </div>
   );
-
 };
 
 const getVisibleTodos = (todos, filter) => {
@@ -172,30 +201,15 @@ class TodoApp extends Component {
             })
           }}
         />
-        <p>
-          Show:
-          {' '}
-          <FilterLink
-            filter='SHOW_ALL'
-            currentFilter={visibilityFilter}
-          >
-            All
-          </FilterLink>
-          {', '}
-          <FilterLink
-            filter='SHOW_ACTIVE'
-            currentFilter={visibilityFilter}
-          >
-            Active
-          </FilterLink>
-          {', '}
-          <FilterLink
-            filter='SHOW_COMPLETED'
-            currentFilter={visibilityFilter}
-          >
-            completed
-          </FilterLink>
-        </p>
+        <Footer
+          visibilityFilter={visibilityFilter}
+          onFilterClick={filter =>
+            store.dispatch({
+              type: 'SET_VISIBILTY_FILTER',
+              filter
+            })
+          }
+        />
       </div>
     );
   };
