@@ -103,7 +103,7 @@ const TodoList = ({todos, onTodoClick, color}) => {
             key={todo.id}
             color={color}
 
-            {...todo}  // this spreads the properties of this object as props of Todo
+            {...todo} // this spreads the properties of this object as props of Todo
 
             onClick={() => {
               onTodoClick(todo.id);
@@ -115,6 +115,23 @@ const TodoList = ({todos, onTodoClick, color}) => {
   );
 };
 
+const AddTodos = ({onAddClick}) => {
+  let input;
+  return (
+    <div>
+      <input ref={node => {
+        this.input = node;
+      }}/>
+      <button onClick={() => {
+        onAddClick(input.value);
+        input.value = '';
+      }}>
+        Add Todo
+      </button>
+    </div>
+  );
+
+};
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
