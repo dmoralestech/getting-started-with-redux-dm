@@ -93,10 +93,10 @@ class FilterLink extends Component {
     return (
       <Link
         active={filter === visibilityFilter}
-        onClick = { () => store.dispatch({
+        onClick={ () => store.dispatch({
           type: 'SET_VISIBILITY_FILTER',
           filter
-          })
+        })
         }
       >
         {children}
@@ -131,21 +131,18 @@ const Footer = ({visibilityFilter, onFilterClick}) => (
     Show:
     {' '}
     <FilterLink
-      filter='SHOW_ALL'
-    >
+      filter='SHOW_ALL'>
       All
     </FilterLink>
     {', '}
     <FilterLink
-      filter='SHOW_ACTIVE'
-    >
+      filter='SHOW_ACTIVE'>
       Active
     </FilterLink>
     {', '}
     <FilterLink
-      filter='SHOW_COMPLETED'
-    >
-      completed
+      filter='SHOW_COMPLETED'>
+      Completed
     </FilterLink>
   </p>
 
