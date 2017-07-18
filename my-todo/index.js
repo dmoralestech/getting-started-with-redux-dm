@@ -55,26 +55,54 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 
-const FilterLink = ({filter, currentFilter, children}) => {
-  if (filter === currentFilter) {
+const Link = ({active, children, onClick}) => {
+  if (active) {
     return (
       <span>{children}</span>
     )
   }
   return (
     <a href="#"
-       onClick={e => {
+       onClick={ e => {
          e.preventDefault();
-         store.dispatch({
-           type: 'SET_VISIBILITY_FILTER',
-           filter
-         });
+         onClick();
        }}
     >
       {children}
     </a>
-  );
-};
+  )
+}
+
+// Container Component
+class FilterLink extends Component {
+
+  componentDidMoount() {
+    this.unsubscribe = store.subscribe(() =>
+      this.forceUpdate()
+    );
+  }
+}
+
+// const FilterLink = ({filter, currentFilter, children}) => {
+//   if (filter === currentFilter) {
+//     return (
+//       <span>{children}</span>
+//     )
+//   }
+//   return (
+//     <a href="#"
+//        onClick={e => {
+//          e.preventDefault();
+//          store.dispatch({
+//            type: 'SET_VISIBILITY_FILTER',
+//            filter
+//          });
+//        }}
+//     >
+//       {children}
+//     </a>
+//   );
+// };
 
 const Footer = ({visibilityFilter, onFilterClick}) => (
   <p>
