@@ -81,6 +81,28 @@ class FilterLink extends Component {
       this.forceUpdate()
     );
   }
+
+  componenentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    const {filter, children} = this.props;
+    const {visibilityFilter} = store.getState();
+
+    return (
+      <Link
+        active={filter === visibilityFilter}
+        onClick = { () => store.dispatch({
+          type: 'SET_VISIBILITY_FILTER',
+          filter
+          })
+        }
+      >
+        {children}
+      </Link>
+    );
+  }
 }
 
 // const FilterLink = ({filter, currentFilter, children}) => {
@@ -110,21 +132,18 @@ const Footer = ({visibilityFilter, onFilterClick}) => (
     {' '}
     <FilterLink
       filter='SHOW_ALL'
-      currentFilter={visibilityFilter}
     >
       All
     </FilterLink>
     {', '}
     <FilterLink
       filter='SHOW_ACTIVE'
-      currentFilter={visibilityFilter}
     >
       Active
     </FilterLink>
     {', '}
     <FilterLink
       filter='SHOW_COMPLETED'
-      currentFilter={visibilityFilter}
     >
       completed
     </FilterLink>
