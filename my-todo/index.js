@@ -166,6 +166,7 @@ const TodoList = ({todos, onTodoClick, color}) => {
   );
 };
 
+let nextTodoId = 0;
 // onAddClick is passed in as a prop.
 // It is a function that has one parameter and it sends a dispatch to store to add a new todo
 const AddTodo = () => {
@@ -232,44 +233,44 @@ class VisibleTodoList extends Component {
   }
 }
 
-let nextTodoId = 0;
-class TodoApp extends Component {
-  render() {
-    const {todos, visibilityFilter} = this.props;
-    const visibleTodos = getVisibleTodos(todos, visibilityFilter);
 
-    return (
-      <div>
-        <AddTodo onAddClick={text => store.dispatch({
-          type: 'ADD_TODO',
-          text: text,
-          id: nextTodoId++
-        })
-        }/>
-        <TodoList
-          color="red"
-          todos={visibleTodos}
-          onTodoClick={ id => {
-            store.dispatch({
-              type: 'TOGGLE_TODO',
-              id
-            })
-          }}
-        />
-        <Footer
-          visibilityFilter={visibilityFilter}
-          onFilterClick={filter =>
-            store.dispatch({
-              type: 'SET_VISIBILTY_FILTER',
-              filter
-            })
-          }
-        />
-      </div>
-    );
-  };
-}
-;
+// class TodoApp extends Component {
+//   render() {
+//     const {todos, visibilityFilter} = this.props;
+//     const visibleTodos = getVisibleTodos(todos, visibilityFilter);
+//
+//     return (
+//       <div>
+//         <AddTodo onAddClick={text => store.dispatch({
+//           type: 'ADD_TODO',
+//           text: text,
+//           id: nextTodoId++
+//         })
+//         }/>
+//         <TodoList
+//           color="red"
+//           todos={visibleTodos}
+//           onTodoClick={ id => {
+//             store.dispatch({
+//               type: 'TOGGLE_TODO',
+//               id
+//             })
+//           }}
+//         />
+//         <Footer
+//           visibilityFilter={visibilityFilter}
+//           onFilterClick={filter =>
+//             store.dispatch({
+//               type: 'SET_VISIBILTY_FILTER',
+//               filter
+//             })
+//           }
+//         />
+//       </div>
+//     );
+//   };
+// }
+// ;
 
 const TodoApp = () => (
   <div>
