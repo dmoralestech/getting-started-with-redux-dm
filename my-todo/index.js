@@ -105,27 +105,6 @@ class FilterLink extends Component {
   }
 }
 
-// const FilterLink = ({filter, currentFilter, children}) => {
-//   if (filter === currentFilter) {
-//     return (
-//       <span>{children}</span>
-//     )
-//   }
-//   return (
-//     <a href="#"
-//        onClick={e => {
-//          e.preventDefault();
-//          store.dispatch({
-//            type: 'SET_VISIBILITY_FILTER',
-//            filter
-//          });
-//        }}
-//     >
-//       {children}
-//     </a>
-//   );
-// };
-
 const Footer = ({visibilityFilter, onFilterClick}) => (
   <p>
     Show:
@@ -218,6 +197,34 @@ const getVisibleTodos = (todos, filter) => {
       return todos.filter(
         t => !t.completed
       );
+  }
+}
+
+class VisibleTodoList extends Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() =>
+      this.forceUpdate());
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    const {todos, visibilityFilter} = store.getState();
+
+    return (
+      <TodoList
+        todos={getVisibleTodos(todos, visibilityFilter)}
+        onTodoClick={ id =>
+            store.dispatch({
+              type: 'TOGGLE_TODO',
+              id
+            })
+        }
+      />
+    );
+
   }
 }
 
