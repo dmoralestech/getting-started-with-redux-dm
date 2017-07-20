@@ -214,6 +214,7 @@ class VisibleTodoList extends Component {
   }
 
   render() {
+    const {store} = this.context;
     const {todos, visibilityFilter} = store.getState();
 
     return (
@@ -229,6 +230,10 @@ class VisibleTodoList extends Component {
     );
 
   }
+}
+
+VisibleTodoList.contextTypes = {
+  store: React.PropTypes.object
 }
 
 class Provider extends Component {
