@@ -167,7 +167,7 @@ const TodoList = ({todos, onTodoClick, color}) => {
 let nextTodoId = 0;
 // onAddClick is passed in as a prop.
 // It is a function that has one parameter and it sends a dispatch to store to add a new todo
-const AddTodo = () => {
+const AddTodo = (props, {store}) => {
   let input;
 
   return (
@@ -188,6 +188,11 @@ const AddTodo = () => {
     </div>
   );
 };
+
+AddTodo.contextTypes = {
+  store: React.PropTypes.object
+}
+
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
     case 'SHOW_ALL':
