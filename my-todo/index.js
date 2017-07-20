@@ -85,6 +85,7 @@ class FilterLink extends Component {
   }
 
   render() {
+    const {store} = this.context;
     const {filter, children} = this.props;
     const {visibilityFilter} = store.getState();
 
@@ -101,6 +102,9 @@ class FilterLink extends Component {
       </Link>
     );
   }
+}
+FilterLink.contextTypes = {
+  store: React.PropTypes.object
 }
 
 const Footer = () => (
