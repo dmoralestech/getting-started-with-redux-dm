@@ -234,44 +234,6 @@ class VisibleTodoList extends Component {
 }
 
 
-// class TodoApp extends Component {
-//   render() {
-//     const {todos, visibilityFilter} = this.props;
-//     const visibleTodos = getVisibleTodos(todos, visibilityFilter);
-//
-//     return (
-//       <div>
-//         <AddTodo onAddClick={text => store.dispatch({
-//           type: 'ADD_TODO',
-//           text: text,
-//           id: nextTodoId++
-//         })
-//         }/>
-//         <TodoList
-//           color="red"
-//           todos={visibleTodos}
-//           onTodoClick={ id => {
-//             store.dispatch({
-//               type: 'TOGGLE_TODO',
-//               id
-//             })
-//           }}
-//         />
-//         <Footer
-//           visibilityFilter={visibilityFilter}
-//           onFilterClick={filter =>
-//             store.dispatch({
-//               type: 'SET_VISIBILTY_FILTER',
-//               filter
-//             })
-//           }
-//         />
-//       </div>
-//     );
-//   };
-// }
-// ;
-
 const TodoApp = () => (
   <div>
     <AddTodo/>
