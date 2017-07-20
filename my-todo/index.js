@@ -53,8 +53,6 @@ const todoApp = combineReducers({
   visibilityFilter
 });
 
-const store = createStore(todoApp);
-
 const Link = ({active, children, onClick}) => {
   if (active) {
     return (
@@ -222,10 +220,10 @@ class VisibleTodoList extends Component {
       <TodoList
         todos={getVisibleTodos(todos, visibilityFilter)}
         onTodoClick={ id =>
-            store.dispatch({
-              type: 'TOGGLE_TODO',
-              id
-            })
+          store.dispatch({
+            type: 'TOGGLE_TODO',
+            id
+          })
         }
       />
     );
@@ -233,6 +231,21 @@ class VisibleTodoList extends Component {
   }
 }
 
+class Provider extends Component {
+  getChildContext() {
+    return {
+      store: this.props.store
+    };
+  }
+
+  render() {
+    return this.props.children;
+  }
+}
+
+Provider.childContextTypes = {
+  store: React.PropTypes.object
+};
 
 const TodoApp = () => (
   <div>
@@ -243,8 +256,9 @@ const TodoApp = () => (
 )
 
 
-ReactDOM.render(
-  <TodoApp/>,
+ReactDOM.render(<Provider store={createStore(todoApp)}>
+    <TodoApp/>
+  </Provider>,
   document.getElementById('root')
 );
 
