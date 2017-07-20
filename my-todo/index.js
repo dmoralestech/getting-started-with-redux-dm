@@ -214,6 +214,7 @@ const getVisibleTodos = (todos, filter) => {
 
 class VisibleTodoList extends Component {
   componentDidMount() {
+    const {store} = this.context;
     this.unsubscribe = store.subscribe(() =>
       this.forceUpdate());
   }
