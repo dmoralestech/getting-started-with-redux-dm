@@ -1,6 +1,7 @@
 import {createStore, combineReducers} from 'redux';
 import ReactDOM from 'react-dom';
 import React, {Component} from 'react';
+import { Provider } from 'react-redux';
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -246,17 +247,17 @@ VisibleTodoList.contextTypes = {
   store: React.PropTypes.object
 }
 
-class Provider extends Component {
-  getChildContext() {
-    return {
-      store: this.props.store
-    };
-  }
-
-  render() {
-    return this.props.children;
-  }
-}
+// class Provider extends Component {
+//   getChildContext() {
+//     return {
+//       store: this.props.store
+//     };
+//   }
+//
+//   render() {
+//     return this.props.children;
+//   }
+// }
 
 Provider.childContextTypes = {
   store: React.PropTypes.object
