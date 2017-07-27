@@ -1,7 +1,7 @@
 import {createStore, combineReducers} from 'redux';
 import ReactDOM from 'react-dom';
 import React, {Component} from 'react';
-import { Provider, connect } from 'react-redux';
+import {Provider, connect} from 'react-redux';
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -213,10 +213,6 @@ const getVisibleTodos = (todos, filter) => {
   }
 }
 
-// class VisibleTodoList extends Component {
-//   componentDidMount() {
-//     const {store} = this.context;
-//     this.unsubscribe = store.subscribe(() =>
 //       this.forceUpdate());
 //   }
 //
@@ -278,15 +274,79 @@ const VisibleTodoList = connect(
 //   }
 // }
 
-Provider.childContextTypes = {
-  store: React.PropTypes.object
-};
+// Provider.childContextTypes = {
+//   store: React.PropTypes.object
+// };
+
+class DisplayExample extends Component {
+
+  input;
+
+  state = {
+    displayValue: ''
+  };
+
+  render() {
+    return (
+      <div>
+        <input ref={node => {
+          input = node;
+        }} onChange={() => this.setState({displayValue: this.input.value}) }/>
+
+        <Preview displayValue={this.state.displayValue}> </Preview>
+      </div>
+    );
+  }
+}
+
+class DisplayExample2 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: '',
+      givenName: '',
+      surname: ''
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <input name="inputValue" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}/>
+        <input name="givenName" value={this.state.givenName} onChange={evt => this.updateInputValue(evt)}/>
+        <input name="surname" value={this.state.surname} onChange={evt => this.updateInputValue(evt)}/>
+        <Preview inputValue={this.state.inputValue}
+                 givenName={this.state.givenName}
+                 surname={this.state.surname}
+                 fullData={this.state}
+        />
+      </div>
+    );
+  }
+
+  updateInputValue(evt) {
+    this.setState({
+      [evt.target.name]: evt.target.value
+    });
+  }
+}
+
+const Preview = ({inputValue, givenName, surname, fullData}) => {
+  return (
+    <div>
+      <h1>{fullData.inputValue}</h1>
+      <h2>{fullData.givenName}</h2>
+      <h3>{fullData.surname}</h3>
+    </div>
+  );
+}
 
 const TodoApp = () => (
   <div>
     <AddTodo/>
     <VisibleTodoList/>
     <Footer/>
+    <DisplayExample2/>
   </div>
 )
 
