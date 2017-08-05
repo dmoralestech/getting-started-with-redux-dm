@@ -172,7 +172,7 @@ const TodoList = ({todos, onTodoClick, color}) => {
 let nextTodoId = 0;
 // onAddClick is passed in as a prop.
 // It is a function that has one parameter and it sends a dispatch to store to add a new todo
-const AddTodo = (props, {store}) => {
+let  AddTodo = ({dispatch}) => {
   let input;
 
   return (
@@ -181,7 +181,7 @@ const AddTodo = (props, {store}) => {
         input = node;
       }}/>
       <button onClick={() => {
-        store.dispatch({
+        dispatch({
           type: 'ADD_TODO',
           id: nextTodoId++,
           text: input.value
@@ -194,9 +194,11 @@ const AddTodo = (props, {store}) => {
   );
 };
 
-AddTodo.contextTypes = {
-  store: React.PropTypes.object
-}
+// AddTodo.contextTypes = {
+//   store: React.PropTypes.object
+// }
+
+AddTodo = connect()(AddTodo);
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
@@ -243,13 +245,13 @@ const getVisibleTodos = (todos, filter) => {
 //   store: React.PropTypes.object
 // }
 
-const mapStateToProps = (state) => {
+const mapStateToTodoListProps = (state) => {
   return {
     todos: getVisibleTodos(state.todos, state.visibilityFilter)
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToTodoListProps = (dispatch) => {
   return {
     onTodoClick: (id) => {
       dispatch({type: 'TOGGLE_TODO', id})
@@ -258,8 +260,8 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const VisibleTodoList = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToTodoListProps,
+  mapDispatchToTodoListProps
 )(TodoList);
 
 // class Provider extends Component {
